@@ -3,7 +3,7 @@
 /**
  * binary_tree_insert_left - inserts a node as the left child
  * @parent: parent node
- * @: node's value
+ * @value: node's value
  *
  * Return: new node
  */
@@ -24,5 +24,5 @@ binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 	node->right = NULL;
 	parent->left = node;
 	node->parent = parent;
-	return node;
+	return (node);
 }
