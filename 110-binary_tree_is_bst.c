@@ -13,7 +13,7 @@ int is_bst(const binary_tree_t *node, int lo, int hi)
 {
 	if (node == NULL)
 		return (1);
-	return (node->n > lo && node->n < hi &&
+	return (node->n > lo && node->n <= hi &&
 			is_bst(node->left, lo, node->n) &&
 			is_bst(node->right, node->n, hi));
 }
