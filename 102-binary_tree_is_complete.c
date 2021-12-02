@@ -28,7 +28,7 @@ static size_t tree_size(const binary_tree_t *tree)
  */
 int is_complete(const binary_tree_t *node, int size, int ind)
 {
-	if (node == NULL)
+	if (node == NULL || (node->right != NULL && node->left == NULL))
 		return (1);
 	if (ind >= size)
 		return (0);
@@ -46,6 +46,6 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	size_t size = tree_size(tree);
 
-	return (is_complete(tree, size, 0));
+	return (tree == NULL ? 1 : is_complete(tree, size, 0));
 }
 
