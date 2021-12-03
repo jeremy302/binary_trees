@@ -153,7 +153,7 @@ static avl_t *balance(avl_t *root, avl_t *node)
 				tmp->right = rotate(tmp->right, 1);
 				nroot = rotate(tmp, -1);
 			}
-			tmp = (tmp == root ? nroot : root);
+			return (tmp == root ? nroot : root);
 		}
 		tmp = tmp->parent;
 	}
