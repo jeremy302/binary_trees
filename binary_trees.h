@@ -72,4 +72,7 @@ avl_t *avl_remove(avl_t *root, int value);
 avl_t *sorted_array_to_avl(int *array, size_t size);
 
 
+
+
+size_t btree_height(const binary_tree_t *tree);
 #endif /* MAIN_H */
