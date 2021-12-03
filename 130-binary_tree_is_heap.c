@@ -20,7 +20,7 @@ static size_t tree_size(const binary_tree_t *tree)
 }
 
 /**
- * is_heap - checks if a node's position is valid for a complete tree and a heap
+ * is_heap - checks if a node's position is valid for a binary heap
  * @node: node to check
  * @size: size of tree
  * @ind: index of node

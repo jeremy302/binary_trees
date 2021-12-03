@@ -49,13 +49,14 @@ static bst_t *insert(bst_t **tree, int value)
 bst_t *array_to_bst(int *array, size_t size)
 {
 	bst_t *tree = NULL, *node = NULL;
-	size_t i;
+	size_t i = 0;
 
 	if (array == NULL || size == 0)
 		return (NULL);
+
 	for (i = 0; i < size; ++i)
 	{
-	    node = insert(&tree, array[i]);
+		node = insert(tree, array[i]);
 		if (tree == NULL)
 			tree = node;
 	    /* TODO: free and return NULL on failure*/
