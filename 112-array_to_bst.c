@@ -7,7 +7,7 @@
  *
  * Return: the inserted node
  */
-bst_t *insert(bst_t **tree, int value)
+static bst_t *insert(bst_t **tree, int value)
 {
 	bst_t *node, *cur, *parent = NULL;
 
@@ -55,7 +55,6 @@ bst_t *array_to_bst(int *array, size_t size)
 		return (NULL);
 	for (i = 0; i < size; ++i)
 	{
-		printf("inserting: %d\n", array[i]);
 	    node = insert(&tree, array[i]);
 		if (tree == NULL)
 			tree = node;
