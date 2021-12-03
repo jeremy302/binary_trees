@@ -55,8 +55,7 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 	if (array == NULL || size == 0)
 		return (NULL);
 
-	mid = (size - 1) / 2;
-	printf("inserting: %d (index %d)\n", array[mid], mid);
+	mid = size / 2;
 	insert(&root, array[mid]);
 	root->left = sorted_array_to_avl(array, mid);
 	if (root->left != NULL)

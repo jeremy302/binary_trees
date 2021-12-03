@@ -123,32 +123,26 @@ static binary_tree_t *rotate(binary_tree_t *tree, char direction)
  */
 static avl_t *balance(avl_t *root, avl_t *node)
 {
-	avl_t *tmp = node, *nroot, *n1, *n2;
-	int lheight, rheight, balance;
+	avl_t *tmp = node, *nroot;
+	int balance;
 
 	while (tmp != NULL)
 	{
-		lheight = btree_height(tmp->left), rheight = btree_height(tmp->right),
-			balance = rheight - lheight;
-
+		balance = binary_tree_balance(tmp);
 		if (balance < -1 || balance > 1)
 		{
-			n1 = lheight >= rheight ? tmp->left : tmp->right;
-			n2 = btree_height(n1->left) >= btree_height(n1->right) ?
-				n1->left : n1->right;
-			node = n2;
-			if (balance == -2 && node->n < tmp->left->n)
+			if (balance == 2 && (binary_tree_balance(tmp->left) == 1
+				|| binary_tree_balance(tmp->left) == 0))
 				nroot = rotate(tmp, 1);
-			else if (balance == -2 && node->n > tmp->left->n)
+			else if (balance == 2 && binary_tree_balance(tmp->left) == -1)
 			{
 				tmp->left = rotate(tmp->left, -1);
 				nroot =  rotate(tmp, 1);
 			}
-			else if (balance == 2 && node->n > tmp->right->n)
-			{
-				nroot =  rotate(tmp, -1);
-			}
-			else if (balance == 2 && node->n < tmp->right->n)
+			else if (balance == -2 && (binary_tree_balance(tmp->right) == -1
+				|| binary_tree_balance(tmp->right) == 0))
+				nroot = rotate(tmp, -1);
+			else if (balance == 2 && binary_tree_balance(tmp->left) == -1)
 			{
 				tmp->right = rotate(tmp->right, 1);
 				nroot = rotate(tmp, -1);
