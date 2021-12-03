@@ -24,14 +24,14 @@ bst_t *smallest(bst_t *node)
  */
 bst_t *bst_remove(bst_t *root, int value)
 {
-	bst_t *node = root, *parent, **plink, *right, *new;
+	bst_t *node = root, *parent, **plink, *new;
 
 	while (node != NULL)
 	{
 		if (node->n == value)
 		{
 			parent = node->parent;
-			plink = parent == NULL || node == root ? &root :
+			plink = parent == NULL ? &root :
 				parent->n > node->n ? &parent->left : &parent->right;
 			if (node->right == NULL && node->left == NULL)
 				*plink = NULL;
@@ -43,19 +43,21 @@ bst_t *bst_remove(bst_t *root, int value)
 			{
 				new = smallest(node->right);
 				if (new == node->right)
-					*plink = new, new->parent = node->parent;
+					*plink = new, new->parent = node->parent, new->left = node->left;
 				else
 				{
-					right = new->right, *plink = new, new->left = node->left;
-					if (node->left)
-						node->left->parent = new;
+					new->parent->left = new->right;
+					if (new->right)
+						new->right->parent = new->parent;
+					new->right = NULL;
+					*plink = new;
+					new->parent = parent;
+					new->left = node->left;
+					if (new->left)
+						new->left->parent = new;
 					new->right = node->right;
-					if (node->right)
-						node->right->parent = new;
-					new->parent->left = right;
-					if (right != NULL)
-						right->parent = new->parent;
-					new->parent = node->parent;
+					if (new->right)
+						new->right->parent = new;
 				}
 			}
 			free(node);
