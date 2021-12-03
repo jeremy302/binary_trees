@@ -43,14 +43,14 @@ bst_t *bst_remove(bst_t *root, int value)
 			{
 				new = smallest(node->right);
 				if (new == node->right)
-					*plink = new, new->parent = node->parent, new->left = node->left;
+					*plink = new, new->parent = node->parent,
+						new->left = node->left, new->left->parent = new;
 				else
 				{
 					new->parent->left = new->right;
 					if (new->right)
 						new->right->parent = new->parent;
-					new->right = NULL, *plink = new;
-					new->parent = parent, new->left = node->left;
+					*plink = new, new->parent = parent, new->left = node->left;
 					if (new->left)
 						new->left->parent = new;
 					new->right = node->right;
