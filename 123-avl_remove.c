@@ -164,8 +164,9 @@ static avl_t *balance(avl_t *root, avl_t *node)
 avl_t *avl_remove(avl_t *root, int value)
 {
 	avl_t *src;
-	(void) root, (void) value;
 
+	if (root == NULL)
+		return (NULL);
 	src = remove_node(&root, value);
 	root = balance(root, src);
 	return (root);

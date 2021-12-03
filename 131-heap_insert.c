@@ -9,10 +9,10 @@
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
-	heap_t *node, *nxt = root;
+	heap_t *node, *nxt = *root;
 
 	if (root == NULL)
 		return (NULL);
-	node = binary_tree_node();
-	while ()
+	(void) value, (void) node, (void) nxt, (void)root;
+	return (NULL);
 }
