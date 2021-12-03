@@ -56,7 +56,7 @@ bst_t *array_to_bst(int *array, size_t size)
 
 	for (i = 0; i < size; ++i)
 	{
-		node = insert(tree, array[i]);
+		node = insert(&tree, array[i]);
 		if (tree == NULL)
 			tree = node;
 	    /* TODO: free and return NULL on failure*/
