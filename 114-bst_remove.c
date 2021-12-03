@@ -36,9 +36,9 @@ bst_t *bst_remove(bst_t *root, int value)
 			if (node->right == NULL && node->left == NULL)
 				*plink = NULL;
 			else if (node->right == NULL)
-				*plink = node->left, node->left->parent = *plink;
+				*plink = node->left, node->left->parent = node->parent;
 			else if (node->left == NULL)
-				*plink = node->right, node->right->parent = *plink;
+				*plink = node->right, node->right->parent = node->parent;
 			else
 			{
 				new = smallest(node->right);
@@ -49,10 +49,8 @@ bst_t *bst_remove(bst_t *root, int value)
 					new->parent->left = new->right;
 					if (new->right)
 						new->right->parent = new->parent;
-					new->right = NULL;
-					*plink = new;
-					new->parent = parent;
-					new->left = node->left;
+					new->right = NULL, *plink = new;
+					new->parent = parent, new->left = node->left;
 					if (new->left)
 						new->left->parent = new;
 					new->right = node->right;
