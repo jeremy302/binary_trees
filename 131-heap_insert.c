@@ -7,7 +7,7 @@
  * @n: a pointer to the queue's size
  * @item: the item to enqueue
  */
-void enqueue_item(heap_t **head, heap_t **tail,	int *n, void *item)
+static void enqueue_item(heap_t **head, heap_t **tail,	int *n, void *item)
 {
 	heap_t *new_node;
 	heap_t *node = (heap_t *)item;
@@ -39,7 +39,7 @@ void enqueue_item(heap_t **head, heap_t **tail,	int *n, void *item)
  *
  * Return: the value of the removed queue
  */
-heap_t *dequeue_item(heap_t **queue_h,
+static heap_t *dequeue_item(heap_t **queue_h,
 	heap_t **queue_t, int *n)
 {
 	heap_t *tmp0;
@@ -78,7 +78,7 @@ heap_t *dequeue_item(heap_t **queue_h,
  *
  * Return: the insert position
  */
-heap_t *get_insert_position(const heap_t *root)
+static heap_t *get_insert_position(const heap_t *root)
 {
 	heap_t *head = NULL, *tail = NULL;
 	heap_t *parent_node = NULL, *current = NULL;
@@ -122,9 +122,9 @@ heap_t *get_insert_position(const heap_t *root)
 /**
  * lift_up - swap node with parent
  * @node: the node's address
- * @root: the root of the tree
+ * @tree: the root of the tree
  */
-void lift_up(heap_t **node, heap_t **tree)
+static void lift_up(heap_t **node, heap_t **tree)
 {
 	heap_t *tmp, *p, *gpnode, *l, *r;
 
@@ -185,9 +185,7 @@ heap_t *heap_insert(heap_t **root, int value)
 		node->parent = parent;
 		node->n = value;
 		if (parent == NULL)
-		{
 			*root = node;
-		}
 		else
 		{
 			if (parent->left == NULL)

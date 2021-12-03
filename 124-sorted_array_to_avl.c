@@ -1,67 +1,46 @@
 #include "binary_trees.h"
 
 /**
- * insert - inserts a value into a binary search tree
- * @tree: tree to insert into
- * @value: value to insert
+ * insert - inserts a node to an AVL tree
+ * @root: tree's root
+ * @array: the sorted array of integers
+ * @size: the length of the given array
  *
- * Return: the inserted node
+ * Return: t pointer to the root of thhe AVL tree
  */
-static bst_t *insert(bst_t **tree, int value)
+avl_t *insert(avl_t *root, int *array, int size)
 {
-	bst_t *node, *cur, *parent = NULL;
+	int *left = NULL, *right = NULL;
+	int n1 = 0, n2 = 0, len = 0;
+	avl_t *p = NULL, *lc = NULL, *rc = NULL;
 
-	if (tree == NULL)
-		return (NULL);
-	node = calloc(1, sizeof(bst_t));
-	if (node == NULL)
-		return (NULL);
-	node->n = value;
-	if (*tree == NULL)
-		return (*tree = node);
-
-	cur = *tree;
-	while (cur != NULL)
+	if ((size > 0) && (array != NULL))
 	{
-		parent = cur;
-		if (node->n == cur->n)
+		p = malloc(sizeof(avl_t));
+		if (p != NULL)
 		{
-			free(node);
-			return (NULL);
+			len = size - 1, n1 = (len / 2),	n2 = len - (len / 2);
+			if (n1 > 0)
+				left = array, lc = insert(p, left, n1);
+			if (n2 > 0)
+				right = array + n1 + 1, rc = insert(p, right, n2);
+			p->parent = root, p->left = lc, p->right = rc;
+			p->n = *(array + (size / 2) - (size % 2 == 0 ? 1 : 0));
 		}
-		cur = node->n > cur->n ? parent->right : parent->left;
 	}
-	if (node->n > parent->n)
-		parent->right = node;
-	else
-		parent->left = node;
-	node->parent = parent;
-	return (node);
+	return (p);
 }
 
-
 /**
- * sorted_array_to_avl - converts a sorted array to an AVL tree
- * @array: array to source
- * @size: size of `array`
+ * sorted_array_to_avl - creates an AVL tree from a sorted array
+ * @array: the sorted array
+ * @size: size of the array
  *
- * Return: created tree
+ * Return: a pointer to the root
  */
 avl_t *sorted_array_to_avl(int *array, size_t size)
 {
-	avl_t *root;
-	int mid;
+	avl_t *tree = NULL;
 
-	if (array == NULL || size == 0)
-		return (NULL);
-
-	mid = size / 2;
-	insert(&root, array[mid]);
-	root->left = sorted_array_to_avl(array, mid);
-	if (root->left != NULL)
-		root->left->parent = root;
-	root->right = sorted_array_to_avl(array + mid + 1, (size - mid) - 1);
-	if (root->right != NULL)
-		root->right->parent = root;
-	return (root);
+	return (array != NULL ? insert(tree, array, (int)size) : NULL);
 }
