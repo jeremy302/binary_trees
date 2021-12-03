@@ -122,7 +122,7 @@ heap_t *get_insert_position(const heap_t *root)
 /**
  * lift_up - swap node with parent
  * @node: the node's address
- * @tree: the root of the tree
+ * @root: the root of the tree
  */
 void lift_up(heap_t **node, heap_t **tree)
 {
