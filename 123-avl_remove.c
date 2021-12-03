@@ -155,6 +155,7 @@ static avl_t *balance(avl_t *root, avl_t *node)
 			}
 			root = (tmp == root ? nroot : root);
 			tmp = nroot;
+			continue;
 		}
 		tmp = tmp->parent;
 	}
