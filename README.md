@@ -1,3 +1,3 @@
 # Project 0x1D. C - Binary trees
 
-common binary trees algorithms
+common binary trees algorithms written in C
